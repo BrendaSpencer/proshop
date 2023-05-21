@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
     }
   },
   {
-    Timestamp: true,
+    timestamps: true,
   }
 );
 
