@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -15,11 +14,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomeScreen from './screens/HomeScreen';
 import ProductSreen from './screens/ProductSreen';
+import CardScreen from './screens/CartScreen';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<App />}>
     <Route index={true} path='/' element={<HomeScreen/>}/>
     <Route path='/product/:id' element={<ProductSreen/>}/>
+    <Route path='/cart' element={<CardScreen/>} />
   </Route>
 ))
 const root = ReactDOM.createRoot(document.getElementById('root'));
