@@ -16,6 +16,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProductSreen from './screens/ProductSreen';
 import CardScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen.jsx';
+import RegisterScreen from './screens/RegisterScreen.jsx';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<App />}>
@@ -23,6 +24,8 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/product/:id' element={<ProductSreen/>}/>
     <Route path='/cart' element={<CardScreen/>} />
     <Route path='/login' element={<LoginScreen/>}/>
+    <Route path='/register' element={<RegisterScreen/>}/>
+
   </Route>
 ))
 const root = ReactDOM.createRoot(document.getElementById('root'));
