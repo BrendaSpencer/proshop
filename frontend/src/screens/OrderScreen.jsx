@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Row,Col,ListGroup,Image,Form,Button,Card} from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { useGetOrderDetailsQuery, useGetPayPalClientIdQuery, usePayOrderMutation  } from "../slices/orderApiSlice";
+import { useGetOrderDetailsQuery, useGetPayPalClientIdQuery, usePayOrderMutation, useDeliverOrderMutation  } from "../slices/orderApiSlice";
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { toast } from 'react-toastify';
 import { useSelector } from "react-redux";
@@ -18,6 +18,8 @@ const OrderScreen = () => {
   } = useGetOrderDetailsQuery(orderId);
 
   const [payOrder, {isLoading:loadingPay}] = usePayOrderMutation();
+
+  const [deliverOrder, {isLoading: loadingDeliver}] = useDeliverOrderMutation();
 
   const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
 
@@ -77,6 +79,16 @@ function createOrder(data, actions){
  }).then((orderId) =>{
   return orderId;
  })
+}
+
+const deliverOrderHandler = async () => {
+  try {
+    await deliverOrder(orderId);
+    refetch();
+    toast.success('Order delivered');
+  } catch (error) {
+   toast.error(error?.data?.message || error.message) 
+  }
 }
   return isLoading ? (
     <Loader />
@@ -197,8 +209,15 @@ function createOrder(data, actions){
                         )}
                       </ListGroup.Item>
                     )}
-                    {/*PAY ORDER PLACEHOLDER*/}
-                    {/*mark as delivered ORDER PLACEHOLDER*/}
+                  { loadingDeliver && <Loader/> }
+
+                  { userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                    <ListGroup.Item>
+                      <Button type='button' className="btn btn-block" onClick={deliverOrderHandler} >
+                        Mark as Delivered
+                      </Button>
+                    </ListGroup.Item>
+                  )}
 
                 </ListGroup>
             </Card>
