@@ -131,13 +131,13 @@ const getUsers = asyncHandler(async (req, res) => {
 // @route   DELETE  /api/users/:id
 // @access  Private/Admin
 const getUserById = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params._id).select('-password');
+  const user = await User.findById(req.params.id).select('-password');
 
   if (user) {
-    res.status(200).json(user)
+    res.json(user)
   }else{
     res.status(404);
-    throw new Error('user not found');
+    throw new Error('user not found!');
   }
 
 });
