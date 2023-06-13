@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Product from '../components/Product';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import Loader from '../components/Loader';
+import Paginate from '../components/Paginate';
 import Message from '../components/Message';
 
 
@@ -26,6 +27,9 @@ const HomeScreen = () => {
           </Col>
          ))}
       </Row>
+      <Paginate
+      pages = {data.pages}
+      page={data.page}/>
       </>) } 
     </>
   )
