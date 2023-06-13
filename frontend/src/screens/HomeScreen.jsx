@@ -8,8 +8,8 @@ import Message from '../components/Message';
 
 
 const HomeScreen = () => {
-  const { pageNumber } = useParams();
-  const { data, isLoading, isError } = useGetProductsQuery({pageNumber});
+  const { pageNumber, keyword } = useParams();
+  const { data, isLoading, isError } = useGetProductsQuery({keyword, pageNumber});
   return (
     <>
     { isLoading ? (
@@ -29,7 +29,8 @@ const HomeScreen = () => {
       </Row>
       <Paginate
       pages = {data.pages}
-      page={data.page}/>
+      page={data.page}
+      keyword = {keyword ? keyword : ''}/>
       </>) } 
     </>
   )
