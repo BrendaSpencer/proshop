@@ -11,10 +11,10 @@ const CustomNav = () => {
             <NavDropdown.Item>Profile</NavDropdown.Item>
           </NavDropdown>
           <LinkContainer to="/info">
-            <Nav.Link>info</Nav.Link>
+            <Nav.Link>Info</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/nieuws">
-            <Nav.Link>nieuws</Nav.Link>
+            <Nav.Link>Nieuws</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/afspraken">
             <Nav.Link>Afspraak Boeken</Nav.Link>

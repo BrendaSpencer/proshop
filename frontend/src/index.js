@@ -32,11 +32,15 @@ import UserListScreen from './screens/admin/UserListScreen.jsx';
 import ProductEditScreen from './screens/admin/ProductEditScreen.jsx';
 import UserEditScreen from './screens/admin/UserEditScreen.jsx';
 import FavoritesScreen from './screens/FavoritesScreen.jsx';
+import NieuwsScreen from './screens/NieuwsScreen.jsx';
+import InfoScreen from './screens/InfoScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/info" element={<InfoScreen />} />
+      <Route path="/nieuws" element={<NieuwsScreen />} />
       <Route path="/search/:keyword" element={<HomeScreen />} />
       <Route path="/page/:pageNumber" element={<HomeScreen />} />
       <Route
