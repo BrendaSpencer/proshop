@@ -16,7 +16,7 @@ const ProductCarousel = () => {
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link
-            to={`/product/${product._id}`}
+            to={`/products/${product._id}`}
             className="d-flex justify-content-center "
           >
             <Image

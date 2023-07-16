@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Form,
   Row,
@@ -10,18 +10,20 @@ import {
   Card,
   Button,
   ListGroupItem,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import Rating from "../components/Rating";
+} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import Rating from '../components/Rating';
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
-} from "../slices/productsApiSlice";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import { addToCart } from "../slices/cartSlice";
+} from '../slices/productsApiSlice';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import { addToCart } from '../slices/cartSlice';
 import Meta from '../components/Meta';
+import { FaRegHeart } from 'react-icons/fa';
+import { addToFavorites } from '../slices/favoritesSlice';
 
 const ProductSreen = () => {
   const { id: productId } = useParams();
@@ -31,7 +33,7 @@ const ProductSreen = () => {
 
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
 
   const {
     data: product,
@@ -47,8 +49,16 @@ const ProductSreen = () => {
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
-    navigate("/cart");
+    navigate('/cart');
   };
+
+  const addToFavoritesHandler = async (product) => {
+    dispatch(addToFavorites({ ...product }));
+    navigate('/favorites');
+  };
+
+  const favorites = useSelector((state) => state.favorites);
+  const { favoritesItems } = favorites;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -56,7 +66,7 @@ const ProductSreen = () => {
       await createReview({
         productId,
         rating,
-        comment
+        comment,
       }).unwrap();
       refetch();
       toast.success('Review Submitted');
@@ -65,7 +75,7 @@ const ProductSreen = () => {
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
-  }
+  };
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
@@ -79,10 +89,13 @@ const ProductSreen = () => {
         </Message>
       ) : (
         <>
-                <Meta title={product.name}/>
+          <Meta title={product.name} />
 
           <Row>
             <Col md={5}>
+              <button onClick={() => addToFavoritesHandler(product)}>
+                <FaRegHeart />
+              </button>
               <Image src={product.image} alt={product.name} fluid></Image>
             </Col>
             <Col md={4}>
@@ -119,8 +132,8 @@ const ProductSreen = () => {
                       <Col>
                         <strong>
                           {product.countInStock > 0
-                            ? "In Stock"
-                            : "Out Of Stock"}
+                            ? 'In Stock'
+                            : 'Out Of Stock'}
                         </strong>
                       </Col>
                     </Row>
@@ -139,7 +152,7 @@ const ProductSreen = () => {
                             {[...Array(product.countInStock).keys()].map(
                               (x) => (
                                 <option key={x + 1} value={x + 1}>
-                                  {x + 1}{" "}
+                                  {x + 1}{' '}
                                 </option>
                               )
                             )}
@@ -215,7 +228,7 @@ const ProductSreen = () => {
                     </Form>
                   ) : (
                     <Message>
-                      Please <Link to="/login">sign in</Link> to write a review{" "}
+                      Please <Link to="/login">sign in</Link> to write a review{' '}
                     </Message>
                   )}
                 </ListGroup.Item>
