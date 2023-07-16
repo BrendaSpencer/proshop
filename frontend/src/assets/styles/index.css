@@ -1,5 +1,6 @@
 main {
   min-height: 80vh;
+  background-color: rgb(207, 204, 204);
 }
 
 .rating span {
@@ -46,8 +47,22 @@ table th {
 .carousel-caption {
   position: absolute;
   width: 100%;
-  left: 0;
+  left: 0%;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
+
 }
+
+.carousel{
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 80%;
+  margin:auto;
+}
+
+.carousel-image{
+  padding-top: 5px;
+
+}
+
+
